@@ -1,0 +1,32 @@
+#!/usr/bin/env node
+
+var async = require("async")
+var asciify = require("asciify")
+var moment = require("moment")
+
+var bannerToDays = require("./lib/bannerToDays")
+var daysToDates = require("./lib/daysToDates")
+var git = require("./lib/git")
+
+var input = process.argv[2] || "cazzhub"
+var name = process.argv[3] || "XPUG Romagna"
+var email = process.argv[4] || "xpug-romagna@googlegroups.com"
+
+  
+asciify(input, {font: "banner"}, function(err, banner) {
+  if (err) {
+    console.log("AHIA")
+    process.exit(1)
+  }
+
+  var days = bannerToDays(banner)
+  var dates = daysToDates(days, moment().subtract("years", 1).day("Sunday"))
+
+  async.series([
+    git.init.bind(null, name, email),
+    git.datesToCommit.bind(null, dates)
+  ], function() {
+    console.log("DONE.")
+  })
+})
+

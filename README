@@ -1,0 +1,13 @@
+Cazzhub
+
+Created at XPUG Romagna on 26/09/2013 meeting.
+Inspired by https://github.com/turkishdelighthorse
+
+Usage:
+./cazzhub [phrase] [user.name] [user.email]
+
+Phrase max length 7 chars
+User.name your github username
+User.email your github email
+
+then push -f on your github account and enjoy!
